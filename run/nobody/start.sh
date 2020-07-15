@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# create day variable from todays date and time
-datetime=$(date +%Y%m%d-%H%M%S)
-
 rclone_config="/config/rclone/config/rclone.conf"
-rclone_log="/config/rclone/logs/rclone_${datetime}.log"
+rclone_log="/config/rclone/logs/rclone.log"
 
 # create folder structure for config, temp and logs
 mkdir -p /config/rclone/config /config/rclone/logs

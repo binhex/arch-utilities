@@ -35,8 +35,11 @@ while true; do
 
 		done
 
-		echo "[info] Moving current log to ${log_path}.0..."
-		mv "${log_path}" "${log_path}.0"
+		echo "[info] Copying current log '${log_path}' to ${log_path}.0..."
+		cp "${log_path}" "${log_path}.0"
+
+		echo "[info] Emptying current log '${log_path}' contents..."
+		> "${log_path}"
 
 	fi
 

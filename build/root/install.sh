@@ -35,7 +35,7 @@ fi
 ####
 
 # define pacman packages
-pacman_packages="screen rclone stress tcpdump dos2unix tmux"
+pacman_packages="screen rclone stress tcpdump dos2unix tmux youtube-dl"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -105,6 +105,33 @@ rm /tmp/permissions_heredoc
 
 # env vars
 ####
+
+cat <<'EOF' > /tmp/envvars_heredoc
+
+export RCLONE_MEDIA_SHARES=$(echo "${RCLONE_MEDIA_SHARES}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${RCLONE_MEDIA_SHARES}" ]]; then
+	echo "[info] RCLONE_MEDIA_SHARES defined as '${RCLONE_MEDIA_SHARES}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] RCLONE_MEDIA_SHARES not defined,(via -e RCLONE_MEDIA_SHARES)" | ts '%Y-%m-%d %H:%M:%.S'
+	export RCLONE_MEDIA_SHARES=""
+fi
+
+export YOUTUBEDL_PLAYLISTS_URL=$(echo "${YOUTUBEDL_PLAYLISTS_URL}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${YOUTUBEDL_PLAYLISTS_URL}" ]]; then
+	echo "[info] YOUTUBEDL_PLAYLISTS_URL defined as '${YOUTUBEDL_PLAYLISTS_URL}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] YOUTUBEDL_PLAYLISTS_URL not defined,(via -e YOUTUBEDL_PLAYLISTS_URL)" | ts '%Y-%m-%d %H:%M:%.S'
+	export YOUTUBEDL_PLAYLISTS_URL=""
+fi
+
+EOF
+
+# replace env vars placeholder string with contents of file (here doc)
+sed -i '/# ENVVARS_PLACEHOLDER/{
+    s/# ENVVARS_PLACEHOLDER//g
+    r /tmp/envvars_heredoc
+}' /usr/local/bin/init.sh
+rm /tmp/envvars_heredoc
 
 # cleanup
 cleanup.sh

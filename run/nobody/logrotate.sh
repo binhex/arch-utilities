@@ -13,6 +13,8 @@ while [[ ! -f "${log_path}" ]]; do
 	sleep 0.1
 done
 
+echo "[info] Log rotate script running for log '${log_path}'"
+
 while true; do
 
 	file_size_kb=$(du -k "${log_path}" | cut -f1)

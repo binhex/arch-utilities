@@ -23,6 +23,9 @@ else
 
 	else
 
+		# call log rotate script (background)
+		nohup /home/nobody/logrotate.sh "${rclone_log}" &
+
 		# split comma separated media shares
 		IFS=',' read -ra rclone_media_shares_list <<< "${RCLONE_MEDIA_SHARES}"
 

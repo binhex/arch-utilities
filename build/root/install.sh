@@ -108,6 +108,22 @@ rm /tmp/permissions_heredoc
 
 cat <<'EOF' > /tmp/envvars_heredoc
 
+export ENABLE_RCLONE=$(echo "${ENABLE_RCLONE}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${ENABLE_RCLONE}" ]]; then
+	echo "[info] ENABLE_RCLONE defined as '${ENABLE_RCLONE}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] ENABLE_RCLONE not defined,(via -e ENABLE_RCLONE), defaulting to 'no'" | ts '%Y-%m-%d %H:%M:%.S'
+	export ENABLE_RCLONE="no"
+fi
+
+export ENABLE_YOUTUBEDL=$(echo "${ENABLE_YOUTUBEDL}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${ENABLE_YOUTUBEDL}" ]]; then
+	echo "[info] ENABLE_YOUTUBEDL defined as '${ENABLE_YOUTUBEDL}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] ENABLE_YOUTUBEDL not defined,(via -e ENABLE_YOUTUBEDL), defaulting to 'no'" | ts '%Y-%m-%d %H:%M:%.S'
+	export ENABLE_YOUTUBEDL="no"
+fi
+
 export RCLONE_MEDIA_SHARES=$(echo "${RCLONE_MEDIA_SHARES}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 if [[ ! -z "${RCLONE_MEDIA_SHARES}" ]]; then
 	echo "[info] RCLONE_MEDIA_SHARES defined as '${RCLONE_MEDIA_SHARES}'" | ts '%Y-%m-%d %H:%M:%.S'

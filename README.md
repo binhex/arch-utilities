@@ -15,6 +15,7 @@ Arch Linux utilities image using "arch-base" image from the [binhex repository](
 This image is primarily used to run various utilities on Linux platforms. This Docker image includes the following packages:-
 
 - supervisor (process manager)
+- ffmpeg
 - screen
 - rclone
 - youtube-dl

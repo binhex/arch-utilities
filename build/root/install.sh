@@ -48,6 +48,19 @@ fi
 # call aur install script (arch user repo)
 source aur.sh
 
+
+# custom packages
+####
+
+ffmpeg_package_name="ffmpeg-release-static.tar.xz"
+
+# download statically linked ffmpeg
+curly.sh -of "/tmp/${ffmpeg_package_name}" -url "https://github.com/binhex/arch-packages/raw/master/static/${OS_ARCH}/${ffmpeg_package_name}"
+
+# unpack and move binaries
+mkdir -p "/tmp/unpack" && tar -xvf "/tmp/${ffmpeg_package_name}" -C "/tmp/unpack"
+mv /tmp/unpack/ffmpeg*/ff* "/usr/bin/"
+
 # container perms
 ####
 

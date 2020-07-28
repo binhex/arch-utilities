@@ -155,6 +155,14 @@ else
 	export YOUTUBEDL_PLAYLISTS_URL=""
 fi
 
+export DEBUG=$(echo "${DEBUG}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${DEBUG}" ]]; then
+	echo "[info] DEBUG defined as '${DEBUG}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] DEBUG not defined,(via -e DEBUG), defaulting to 'no'" | ts '%Y-%m-%d %H:%M:%.S'
+	export DEBUG="no"
+fi
+
 EOF
 
 # replace env vars placeholder string with contents of file (here doc)

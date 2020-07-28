@@ -35,8 +35,11 @@ else
 			for rclone_media_shares_item in "${rclone_media_shares_list[@]}"; do
 
 				echo "[info] Running rclone for media share '${rclone_media_shares_item}', check rclone log file '${rclone_log}' for output..."
-				echo "/usr/bin/rclone --config=${rclone_config} copy /media/${rclone_media_shares_item} encrypt:/${rclone_media_shares_item} --log-file=${rclone_log} --log-level INFO"
+				if [[ "${DEBUG}" == 'yes' ]]; then
+					echo "/usr/bin/rclone --config=${rclone_config} copy /media/${rclone_media_shares_item} encrypt:/${rclone_media_shares_item} --log-file=${rclone_log} --log-level INFO"
+				fi
 				/usr/bin/rclone --config="${rclone_config}" copy "/media/${rclone_media_shares_item}" "encrypt:/${rclone_media_shares_item}" --log-file="${rclone_log}" --log-level INFO
+				echo "[info] rclone for media share '${rclone_media_shares_item}' finished"
 
 			done
 

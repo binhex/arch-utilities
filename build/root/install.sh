@@ -35,7 +35,7 @@ fi
 ####
 
 # define pacman packages
-pacman_packages="screen rclone stress tcpdump dos2unix tmux youtube-dl"
+pacman_packages="screen rsync rclone stress tcpdump dos2unix tmux youtube-dl"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then

@@ -17,6 +17,7 @@ This image is primarily used to run various utilities on Linux platforms. This D
 - supervisor (process manager)
 - ffmpeg
 - screen
+- rsync
 - rclone
 - youtube-dl
 - stress

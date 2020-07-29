@@ -13,7 +13,7 @@ while [[ ! -f "${log_path}" ]]; do
 	sleep 0.1
 done
 
-echo "[info] Log rotate script running for log '${log_path}'"
+echo "[info] Log rotate script running, monitoring log file '${log_path}'"
 
 while true; do
 

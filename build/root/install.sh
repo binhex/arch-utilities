@@ -35,7 +35,7 @@ fi
 ####
 
 # define pacman packages
-pacman_packages="screen rsync rclone stress tcpdump dos2unix tmux youtube-dl"
+pacman_packages="screen rsync rclone stress tcpdump dos2unix tmux python-pip"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -62,6 +62,9 @@ curly.sh -of "/tmp/${ffmpeg_package_name}" -url "https://github.com/binhex/arch-
 # unpack and move binaries
 mkdir -p "/tmp/unpack" && tar -xvf "/tmp/${ffmpeg_package_name}" -C "/tmp/unpack"
 mv /tmp/unpack/ffmpeg*/ff* "/usr/bin/"
+
+# install youtube-dl via pip
+pip install -U youtube-dl
 
 # container perms
 ####
@@ -131,28 +134,12 @@ else
 	export ENABLE_RCLONE="no"
 fi
 
-export ENABLE_YOUTUBEDL=$(echo "${ENABLE_YOUTUBEDL}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
-if [[ ! -z "${ENABLE_YOUTUBEDL}" ]]; then
-	echo "[info] ENABLE_YOUTUBEDL defined as '${ENABLE_YOUTUBEDL}'" | ts '%Y-%m-%d %H:%M:%.S'
-else
-	echo "[info] ENABLE_YOUTUBEDL not defined,(via -e ENABLE_YOUTUBEDL), defaulting to 'no'" | ts '%Y-%m-%d %H:%M:%.S'
-	export ENABLE_YOUTUBEDL="no"
-fi
-
 export RCLONE_MEDIA_SHARES=$(echo "${RCLONE_MEDIA_SHARES}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 if [[ ! -z "${RCLONE_MEDIA_SHARES}" ]]; then
 	echo "[info] RCLONE_MEDIA_SHARES defined as '${RCLONE_MEDIA_SHARES}'" | ts '%Y-%m-%d %H:%M:%.S'
 else
 	echo "[info] RCLONE_MEDIA_SHARES not defined,(via -e RCLONE_MEDIA_SHARES)" | ts '%Y-%m-%d %H:%M:%.S'
 	export RCLONE_MEDIA_SHARES=""
-fi
-
-export YOUTUBEDL_PLAYLISTS_URL=$(echo "${YOUTUBEDL_PLAYLISTS_URL}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
-if [[ ! -z "${YOUTUBEDL_PLAYLISTS_URL}" ]]; then
-	echo "[info] YOUTUBEDL_PLAYLISTS_URL defined as '${YOUTUBEDL_PLAYLISTS_URL}'" | ts '%Y-%m-%d %H:%M:%.S'
-else
-	echo "[info] YOUTUBEDL_PLAYLISTS_URL not defined,(via -e YOUTUBEDL_PLAYLISTS_URL)" | ts '%Y-%m-%d %H:%M:%.S'
-	export YOUTUBEDL_PLAYLISTS_URL=""
 fi
 
 export DEBUG=$(echo "${DEBUG}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')

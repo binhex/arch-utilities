@@ -38,14 +38,14 @@ function run() {
 		if [[ "${youtubedl_format}" == "audio" ]];then
 
 			echo "[info] Running youtube-dl for url(s) '${youtubedl_url_item}', check youtube-dl log file '${youtubedl_log}' for output..."
-			echo "[debug] youtube-dl --extract-audio --audio-format mp3 -i --geo-bypass -f bestaudio --no-overwrites --default-search 'ytsearch' ${youtubedl_flags} --output '/config/youtube-dl/output/%(playlist_index)s-%(title)s.%(ext)s' '${youtubedl_url_item}' >> '${youtubedl_log}' 2>&1"
+			echo "[info] youtube-dl --extract-audio --audio-format mp3 -i --geo-bypass -f bestaudio --no-overwrites --default-search 'ytsearch' ${youtubedl_flags} --output '/config/youtube-dl/output/%(playlist_index)s-%(title)s.%(ext)s' '${youtubedl_url_item}' >> '${youtubedl_log}' 2>&1"
 
 			/usr/bin/youtube-dl --extract-audio --audio-format mp3 -i --geo-bypass -f bestaudio --no-overwrites --default-search 'ytsearch' ${youtubedl_flags} --output "/config/youtube-dl/output/%(playlist_index)s-%(title)s.%(ext)s" "${youtubedl_url_item}" >> "${youtubedl_log}" 2>&1
 
 		else
 
 			echo "[info] Running youtube-dl for url(s) '${youtubedl_url_item}', check youtube-dl log file '${youtubedl_log}' for output..."
-			echo "[debug] youtube-dl -i --geo-bypass -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' --merge-output-format mp4 --no-overwrites --default-search 'ytsearch' ${youtubedl_flags} --output '/config/youtube-dl/output/%(playlist_index)s-%(title)s.%(ext)s' '${youtubedl_url_item}' >> '${youtubedl_log}' 2>&1"
+			echo "[info] youtube-dl -i --geo-bypass -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' --merge-output-format mp4 --no-overwrites --default-search 'ytsearch' ${youtubedl_flags} --output '/config/youtube-dl/output/%(playlist_index)s-%(title)s.%(ext)s' '${youtubedl_url_item}' >> '${youtubedl_log}' 2>&1"
 
 			/usr/bin/youtube-dl -i --geo-bypass -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' --merge-output-format mp4 --no-overwrites --default-search 'ytsearch' ${youtubedl_flags} --output "/config/youtube-dl/output/%(playlist_index)s-%(title)s.%(ext)s" "${youtubedl_url_item}" >> "${youtubedl_log}" 2>&1
 		fi
